@@ -6,6 +6,8 @@ import { MTLLoader } from './utils/MTLLoader.js';
 const mtlLoader = new MTLLoader();
 const objLoader = new OBJLoader();
 
+let textObj;
+
 const canvas = document.querySelector('.webgl');
 const scene = new THREE.Scene();
 const light = new THREE.AmbientLight(0xffffff);
@@ -46,7 +48,7 @@ load();
 
 async function load() {
     const textMtl = await loadMtl('./assets/9months.mtl');
-    const textObj = await loadObj('./assets/9months.obj', textMtl);
+    textObj = await loadObj('./assets/9months.obj', textMtl);
 
     scene.add(textObj);
     textObj.position.y = 0.5;
@@ -64,6 +66,7 @@ function animate() {
     controls.update();
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
+    textObj.rotateY(0.005);
 }
 
 animate()
