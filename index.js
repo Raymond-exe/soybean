@@ -17,6 +17,8 @@ const sizes = {
     ratio: function() { return this.width/this.height; }
 }
 
+const zoomLock = (sizes.ratio() > 1 ? 250 : 150);
+
 const camera = new THREE.OrthographicCamera(sizes.width/-2, sizes.width/2, sizes.height/2, sizes.height/-2, 1, 1000);
 camera.position.set(0, 0, 5);
 camera.rotation.set(0, -Math.PI, 0);
