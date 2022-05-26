@@ -19,7 +19,7 @@ const sizes = {
     ratio: function() { return this.width/this.height; }
 }
 
-const zoomLock = (sizes.ratio() > 1 ? 250 : 150);
+const zoomLock = (sizes.ratio() > 1 ? 175 : 100);
 
 const camera = new THREE.OrthographicCamera(sizes.width/-2, sizes.width/2, sizes.height/2, sizes.height/-2, 1, 1000);
 camera.position.set(0, 0, 5);
@@ -29,8 +29,8 @@ const controls = new OrbitControls(camera, canvas);
 controls.enablePan = false;
 controls.enableDamping = true;
 controls.dampingFactor = 0.03;
-controls.maxZoom = 175;
-controls.minZoom = 175;
+controls.maxZoom = zoomLock;
+controls.minZoom = zoomLock;
 // controls.maxDistance = 1;
 // controls.minDistance = 100;
 
