@@ -10,7 +10,7 @@ import {
 	TextureLoader,
 	Vector2,
 	sRGBEncoding
-} from '/utils/three.modules.js';
+} from 'https://unpkg.com/three@latest/build/three.module.js';
 
 /**
  * Loads a Wavefront .mtl file specifying materials
