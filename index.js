@@ -6,7 +6,7 @@ import { MTLLoader } from './utils/MTLLoader.js';
 const mtlLoader = new MTLLoader();
 const objLoader = new OBJLoader();
 
-let textObj;
+let importedMesh;
 
 const canvas = document.querySelector('.webgl');
 const scene = new THREE.Scene();
@@ -51,19 +51,28 @@ scene.add(light);
 
 load();
 
+const OFFSET = {
+    '9months': { x:0, y:0.5, z:0 },
+    '16months': { x:0, y:0, z:0 }
+}
+
+const parentFile = getPageName();
+function getPageName() {
+    const path = window.location.pathname;
+    return path.split("/").pop().split('.')[0];
+}
+
 async function load() {
-    const parentFile = getPageName()
+    const parentFile = getPageName();
     const textMtl = await loadMtl(`./assets/${parentFile}.mtl`);
-    textObj = await loadObj(`./assets/${parentFile}.obj`, textMtl);
+    importedMesh = await loadObj(`./assets/${parentFile}.obj`, textMtl);
 
-    scene.add(textObj);
-    textObj.position.y = 0.5;
-    console.log(getPageName())
-
-    function getPageName() {
-        const path = window.location.pathname;
-        return path.split("/").pop().split('.')[0];
-    }
+    scene.add(importedMesh);
+    
+    const off = OFFSET[parentFile];
+    importedMesh.position.x = off.x;
+    importedMesh.position.y = off.y;
+    importedMesh.position.z = off.z;
 }
 
 window.addEventListener('resize', function() {
@@ -72,11 +81,52 @@ window.addEventListener('resize', function() {
     camera.updateProjectionMatrix();
 })
 
+
+const deg0 = new THREE.Vector3( 0, 1, 0 );
+const deg45 = new THREE.Vector3( -1, 1, 0 ).normalize();
+const deg90 = new THREE.Vector3( 1, 0, 0 );
+const deg135 = new THREE.Vector3( 1, 1, 0 ).normalize();
+const zAxis = new THREE.Vector3( 0, 0, 1 );
+const ROTATIONS = {
+    'Text': deg0,
+    'cube_Cube': deg0,
+    '008': deg0,
+    '015': zAxis,
+    '007': zAxis,
+    '014': deg45,
+    '006': deg45,
+    '013': zAxis,
+    '005': zAxis,
+    '012': deg90,
+    '004': deg90,
+    '011': zAxis,
+    '003': zAxis,
+    '010': deg135,
+    '002': deg135,
+    '009': zAxis,
+    '001': zAxis,
+}
 function animate() {
     controls.update();
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
-    if (textObj) { textObj.rotateY(0.005) }
+    if (importedMesh) {
+        switch (parentFile) {
+            case '9months':
+                importedMesh.rotateY(0.005);
+                break;
+            case '16months':
+                meshLoop: for (let mesh of importedMesh.children) {
+                    for (let index of Object.keys(ROTATIONS)) {
+                        if (mesh.name.includes(index)) {
+                            mesh.rotateOnAxis(ROTATIONS[index], 0.01)
+                            continue meshLoop;
+                        }
+                    }
+                    mesh.rotateOnAxis(deg0, 0.01);
+                }
+        }
+    }
 }
 
 animate()
