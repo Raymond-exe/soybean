@@ -19,9 +19,14 @@ const sizes = {
     ratio: function() { return this.width/this.height; }
 }
 
-const zoomLock = (sizes.ratio() > 1 ? 175 : 100);
+const zoomLock = (sizes.ratio() > 1 ? 1 : 0.65);
 
-const camera = new THREE.OrthographicCamera(sizes.width/-2, sizes.width/2, sizes.height/2, sizes.height/-2, 1, 1000);
+const camera = new THREE.OrthographicCamera(
+    sizes.width/(-400*zoomLock),
+    sizes.width/(400*zoomLock),
+    sizes.height/(400*zoomLock),
+    sizes.height/(-400*zoomLock),
+    1, 1000);
 camera.position.set(0, 0, 5);
 camera.rotation.set(0, -Math.PI, 0);
 
@@ -29,7 +34,7 @@ const controls = new OrbitControls(camera, canvas);
 controls.enablePan = false;
 controls.enableDamping = true;
 controls.dampingFactor = 0.03;
-controls.maxZoom = zoomLock;
+controls.maxZoom = 1;
 controls.minZoom = zoomLock;
 // controls.maxDistance = 1;
 // controls.minDistance = 100;
@@ -47,17 +52,22 @@ scene.add(light);
 load();
 
 async function load() {
-    const textMtl = await loadMtl('./assets/9months.mtl');
-    textObj = await loadObj('./assets/9months.obj', textMtl);
+    const parentFile = getPageName()
+    const textMtl = await loadMtl(`./assets/${parentFile}.mtl`);
+    textObj = await loadObj(`./assets/${parentFile}.obj`, textMtl);
 
     scene.add(textObj);
     textObj.position.y = 0.5;
+    console.log(getPageName())
+
+    function getPageName() {
+        const path = window.location.pathname;
+        return path.split("/").pop().split('.')[0];
+    }
 }
 
 window.addEventListener('resize', function() {
-    sizes.width = window.innerWidth;
-    sizes.height = window.innerHeight;
-    renderer.setSize(sizes.width, sizes.height);
+    // TODO add resizability
     camera.aspect = sizes.ratio();
     camera.updateProjectionMatrix();
 })
@@ -66,7 +76,7 @@ function animate() {
     controls.update();
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
-    textObj.rotateY(0.005);
+    if (textObj) { textObj.rotateY(0.005) }
 }
 
 animate()
