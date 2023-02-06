@@ -16,7 +16,8 @@ light.intensity = 3;
 const sizes = {
     width: window.innerWidth,
     height: window.innerHeight,
-    ratio: function() { return this.width/this.height; }
+    ratio: function() { return this.width/this.height; },
+    update: function () { canvas.width = this.width; canvas.height = this.height; }
 }
 
 const zoomLock = (sizes.ratio() > 1 ? 1 : 0.65);
@@ -76,10 +77,11 @@ async function load() {
 }
 
 window.addEventListener('resize', function() {
-    // TODO add resizability
+    sizes.update();
     camera.aspect = sizes.ratio();
     camera.updateProjectionMatrix();
-})
+    renderer.setSize(sizes.width, sizes.height);
+});
 
 
 const deg0 = new THREE.Vector3( 0, 1, 0 );
