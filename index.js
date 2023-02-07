@@ -17,7 +17,12 @@ const sizes = {
     width: window.innerWidth,
     height: window.innerHeight,
     ratio: function() { return this.width/this.height; },
-    update: function () { canvas.width = this.width; canvas.height = this.height; }
+    update: function (w = this.width, h = this.height) {
+        this.width = w;
+        this.height = h;
+        canvas.width = this.width;
+        canvas.height = this.height;
+    }
 }
 
 const zoomLock = (sizes.ratio() > 1 ? 1 : 0.65);
@@ -77,10 +82,10 @@ async function load() {
 }
 
 window.addEventListener('resize', function() {
-    sizes.update();
+    sizes.update( window.innerWidth, window.innerHeight );
     camera.aspect = sizes.ratio();
     camera.updateProjectionMatrix();
-    renderer.setSize(sizes.width, sizes.height);
+    renderer.setSize( window.innerWidth, window.innerHeight );
 });
 
 
