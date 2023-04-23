@@ -1,6 +1,6 @@
 
 ._19 {
-    background-color: #ff99ff;
+    background-color: #ffbbff;
     overflow: hidden;
 }
 
@@ -19,6 +19,13 @@
     width: 20vmax;
     height: 20vmax;
     transform: translate(-50%, -50%);
-    border-radius: 1.5vmax;
-    /* box-shadow: 0 0 2px white; */
+    border-radius: 10vmax;
+    transition: all 0.25s;
+    pointer-events: none;
+}
+
+#photofield .hidden {
+    width: 0;
+    height: 0;
+    transition: all 1s;
 }

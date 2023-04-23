@@ -1,48 +1,28 @@
 {
     "pics": [
-        {
-            "src": "https://media.discordapp.net/attachments/774125506210693121/1099528064809050153/IMG_9936.png",
-            "offset": { "x": 0, "y": -20 }
-        },
-        {
-            "src": "https://media.discordapp.net/attachments/774125506210693121/1099528129506197584/IMG_9794.png",
-            "offset": { "x": 0, "y": -20 }
-        },
-        {
-            "src": "https://media.discordapp.net/attachments/1081290558728835193/1088720757565161502/4D0A8392-6D92-4C8C-A100-B228F7FB6C50.jpg",
-            "offset": { "x": 0, "y": -20 }
-        },
-        {
-            "src": "https://media.discordapp.net/attachments/1081290558728835193/1086515361052119070/IMG_9642.jpg",
-            "offset": { "x": 0, "y": -20 }
-        },
-        {
-            "src": "https://media.discordapp.net/attachments/1081290558728835193/1084354533557289061/5B64455D-5E2B-41AF-9243-FA6EDE4448A7.jpg",
-            "offset": { "x": 0, "y": -20 }
-        },
-        {
-            "src": "https://media.discordapp.net/attachments/1081290558728835193/1083313628876378132/IMG_9596.jpg",
-            "offset": { "x": 0, "y": -20 }
-        },
-        {
-            "src": "https://media.discordapp.net/attachments/913325419745394709/1099529510191366268/IMG_5226.jpg",
-            "offset": { "x": 0, "y": -20 }
-        },
-        {
-            "src": "https://media.discordapp.net/attachments/913325419745394709/1099529496979308574/IMG_5230.jpg",
-            "offset": { "x": 0, "y": -20 }
-        },
-        {
-            "src": "https://media.discordapp.net/attachments/913325419745394709/1099529437097242624/IMG_5238.jpg",
-            "offset": { "x": 0, "y": -20 }
-        },
-        {
-            "src": "https://media.discordapp.net/attachments/913325419745394709/1099529436656844922/IMG_5239.jpg",
-            "offset": { "x": 0, "y": -20 }
-        },
-        {
-            "src": "https://media.discordapp.net/attachments/913325419745394709/1099529435448889376/IMG_3802.jpg",
-            "offset": { "x": 0, "y": -20 }
-        }
+        "./assets/pika/bread.png",
+        "./assets/pika/001.png",
+        "./assets/pika/002.png",
+        "./assets/pika/003.png",
+        "./assets/pika/004.png",
+        "./assets/pika/005.png",
+        "./assets/pika/006.png",
+        "./assets/pika/007.png",
+        "./assets/pika/008.png",
+        "./assets/pika/009.png",
+        "./assets/pika/010.png",
+        "./assets/pika/011.png",
+        "./assets/pika/012.png",
+        "./assets/pika/013.png",
+        "./assets/pika/014.png",
+        "./assets/pika/015.png",
+        "./assets/pika/016.png",
+        "./assets/pika/017.png",
+        "./assets/pika/018.png",
+        "./assets/pika/019.png",
+        "./assets/pika/020.png",
+        "./assets/pika/021.png",
+        "./assets/pika/022.png",
+        "./assets/pika/023.png"
     ]
 }

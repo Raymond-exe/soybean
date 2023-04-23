@@ -1,8 +1,4 @@
-fetch('./pikapics.json')
-    .then((response) => response.json())
-    .then((json) => console.log(json));
-
-const MOUSE_THRESHOLD = 50;
+const MOUSE_THRESHOLD = 75;
 const MAX_PHOTOS = 10;
 const photos = [];
 const photo_srcs = [];
@@ -29,22 +25,35 @@ function getDistance(a, b = lastPosition) {
 function getRandomImage(x, y) {
     // creating HTML element
     const element = document.createElement("img");
-    element.className = "photo";
+    element.className = "hidden photo";
 
     // select a random photo for use
-    console.log(PIKA_PICS);
     const photo = PIKA_PICS[Math.floor(Math.random() * PIKA_PICS.length)];
-    element.style.left = x + photo.offset.x;
-    element.style.top = y + photo.offset.y;
-    element.src = photo.src;
+    if (photo_srcs.includes(photo)) {
+        return getRandomImage(x, y);
+    }
+    element.style.left = x;
+    element.style.top = y;
+    element.src = `${photo}?width=256&height=256`;
 
     photofield().appendChild(element);
 
     photos.push(element);
+    photo_srcs.push(photo)
     while (photos.length > MAX_PHOTOS) {
-        photos.shift().remove();
+        photo_srcs.shift();
+        let del = photos.shift();
+        del.classList.add("hidden");
+        del.style.opacity = 0;
+        setTimeout(() => {
+            del.remove();
+        }, 750);
     }
     
+    setTimeout(() => {
+        element.classList.remove("hidden");
+    }, 1);
+
     return element;
 }
 
