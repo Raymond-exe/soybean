@@ -1,0 +1,24 @@
+
+._19 {
+    background-color: #ff99ff;
+    overflow: hidden;
+}
+
+#photofield {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#photofield .photo {
+    position: absolute;
+    width: 20vmax;
+    height: 20vmax;
+    transform: translate(-50%, -50%);
+    border-radius: 1.5vmax;
+    /* box-shadow: 0 0 2px white; */
+}
