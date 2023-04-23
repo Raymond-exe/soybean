@@ -95,7 +95,6 @@ window.addEventListener("mousemove", handleEvent);
 window.addEventListener("mousedown", handleEvent);
 
 function handleEvent(event) {
-    console.log(event);
     if (event.type === "mousedown" || getDistance({ x:event.x, y:event.y }) > MOUSE_THRESHOLD) {
         lastPosition = { x: event.x, y: event.y };
         getRandomImage(event.x, event.y);
