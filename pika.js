@@ -1,7 +1,7 @@
 /* * * * * TWEAKABLES * * * * */
 
 // mouse travel before new photo appears
-const MOUSE_THRESHOLD = 75;
+const MOUSE_THRESHOLD = 85;
 
 // max number of photos on the screen
 const MAX_PHOTOS = 5;
@@ -29,8 +29,14 @@ let PIKA_PICS;
 // loads JSON and assigns data to PIKA_PICS (above)
 async function loadPikaPics() {
     PIKA_PICS = (await (await fetch('./pikapics.json')).json()).pics;
+    for (const src of PIKA_PICS) {
+        let img = document.createElement("img");
+        img.classList.add("secret");
+        img.src = src;
+        document.body.appendChild(img);
+    }
 }
-loadPikaPics();
+setTimeout(loadPikaPics, 5);
 
 // accessor for document window's photoField div element
 function getPhotoField() {
@@ -106,7 +112,7 @@ function multiEventHandler(event) {
     }
 
     function handleEvent(coord) {
-        if (event.type === "mousedown" || event.type === "touchstart" || getDistance({ x:coord.x, y:coord.y }) > MOUSE_THRESHOLD) {
+        if (event.type === "mousedown" || event.type === "touchstart" || getDistance({ x: coord.x, y: coord.y }) > MOUSE_THRESHOLD) {
             lastPosition = { x: coord.x, y: coord.y };
             getRandomImage(coord.x, coord.y);
         }
