@@ -4,7 +4,7 @@
 const MOUSE_THRESHOLD = 75;
 
 // max number of photos on the screen
-const MAX_PHOTOS = 10;
+const MAX_PHOTOS = 5;
 
 
 
@@ -91,12 +91,24 @@ function getRandomImage(x, y) {
 
 /* * * * * EVENT LISTENERS * * * * */
 
-window.addEventListener("mousemove", handleEvent);
-window.addEventListener("mousedown", handleEvent);
+window.addEventListener("mousemove",  multiEventHandler);
+window.addEventListener("mousedown",  multiEventHandler);
+window.addEventListener("touchstart", multiEventHandler);
+window.addEventListener("touchmove",  multiEventHandler);
 
-function handleEvent(event) {
-    if (event.type === "mousedown" || getDistance({ x:event.x, y:event.y }) > MOUSE_THRESHOLD) {
-        lastPosition = { x: event.x, y: event.y };
-        getRandomImage(event.x, event.y);
+function multiEventHandler(event) {
+    if (event.type.startsWith("mouse")) {
+        handleEvent(event);
+    } else {
+        for (const touch of event.changedTouches) {
+            handleEvent({ x: touch.clientX, y: touch.clientY });
+        }
+    }
+
+    function handleEvent(coord) {
+        if (event.type === "mousedown" || event.type === "touchstart" || getDistance({ x:coord.x, y:coord.y }) > MOUSE_THRESHOLD) {
+            lastPosition = { x: coord.x, y: coord.y };
+            getRandomImage(coord.x, coord.y);
+        }
     }
 }
