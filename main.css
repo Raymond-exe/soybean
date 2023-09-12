@@ -1,10 +1,15 @@
 
+._24 {
+    background-color: #ffbbff;
+    overflow: hidden;
+}
+
 ._19 {
     background-color: #ffbbff;
     overflow: hidden;
 }
 
-#photofield {
+._19 #photofield {
     position: fixed;
     top: 0;
     left: 0;
@@ -14,7 +19,7 @@
     height: 100%;
 }
 
-#photofield .photo {
+._19 #photofield .photo {
     position: absolute;
     width: 20vmax;
     height: 20vmax;
@@ -24,7 +29,7 @@
     pointer-events: none;
 }
 
-#photofield .hidden {
+._19 #photofield .hidden {
     width: 0;
     height: 0;
     transition: all 1s;
